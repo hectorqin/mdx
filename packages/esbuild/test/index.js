@@ -1,14 +1,10 @@
 /**
- * @typedef {import('esbuild').BuildFailure} BuildFailure
- * @typedef {import('esbuild').Plugin} Plugin
- * @typedef {import('hast').Root} Root
- * @typedef {import('mdx/types.js').MDXModule} MDXModule
- * @typedef {import('vfile').VFile} VFile
- */
-
-/**
+ * @import {BuildFailure, Plugin} from 'esbuild'
+ * @import {Root} from 'hast'
+ * @import {MDXModule} from 'mdx/types.js'
+ * @import {VFile} from 'vfile'
  * Augment node types:
- * @typedef {import('remark-mdx')}
+ * @import {} from 'remark-mdx'
  */
 
 import assert from 'node:assert/strict'
@@ -219,8 +215,6 @@ test('@mdx-js/esbuild', async function (t) {
       const exception = /** @type {BuildFailure} */ (error)
       const message = exception.errors[0]
 
-      // `any` according to esbuild types.
-      // type-coverage:ignore-next-line
       delete message.detail
 
       assert.deepEqual(message, {
@@ -266,8 +260,6 @@ test('@mdx-js/esbuild', async function (t) {
       const result = JSON.parse(JSON.stringify(error))
 
       for (const message of [...result.errors, ...result.warnings]) {
-        // `any` according to esbuild types.
-        // type-coverage:ignore-next-line
         delete message.detail
       }
 
